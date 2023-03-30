@@ -1,12 +1,162 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" dir="ltr">
 	<head>
-		<meta charset="UTF-8" />
-		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<title>暂时的</title>
+		<meta charset="utf-8" />
+		<title>万能卡</title>
+		<link rel="shortcut icon" type="image/png" href="img/bear2.png" />
+		<meta name="viewport" content="width=device-width,initial-scale=1" />
+		<style>
+			* {
+				font-family: "montserrat", sans-serif;
+			}
+
+			body {
+				margin: 0;
+				padding: 0;
+			}
+
+			.page {
+				background: #fff;
+				display: flex;
+				flex-wrap: wrap;
+			}
+
+			.col {
+				flex: 1;
+				height: 100vh;
+				position: relative;
+			}
+
+			.countdown-col {
+				background: url(./img/郁金香3.jpg) no-repeat center;
+				background-size: cover;
+			}
+
+			.time {
+				color: #fff;
+				text-transform: uppercase;
+				width: 90%;
+				display: flex;
+				justify-content: center;
+			}
+
+			.middle {
+				position: absolute;
+				top: 50%;
+				left: 50%;
+				transform: translate(-50%, -50%);
+				text-align: center;
+			}
+
+			.time span {
+				padding: 0 14px;
+				font-size: 10px;
+			}
+
+			.time span div {
+				font-size: 40px;
+			}
+
+			.newsletter {
+				width: 90%;
+			}
+
+			.newsletter h4 {
+				font-style: italic;
+				font-size: 12px;
+			}
+
+			.newsletter input {
+				display: block;
+				margin: 12px auto;
+				width: 100%;
+				max-width: 400px;
+				box-sizing: border-box;
+				padding: 14px 20px;
+				border-radius: 30px;
+				border: 1px solid #ddd;
+				outline: none;
+			}
+
+			.newsletter-btn {
+				background-image: linear-gradient(120deg, #e0c3fc 0%, #8ec5fc 100%);
+				color: #fff;
+				cursor: pointer;
+				transition: 0.4s;
+			}
+
+			.newsletter-btn:hover {
+				opacity: 0.7;
+			}
+
+			@media screen and (max-width: 900px) {
+				.col {
+					flex: 100%;
+				}
+			}
+		</style>
 	</head>
 	<body>
-		✌
+		<div class="page">
+			<div class="countdown-col col">
+				<div class="time middle">
+					<span>
+						<div id="d">12</div>
+						Days
+					</span>
+					<span>
+						<div id="h">06</div>
+						Hours
+					</span>
+					<span>
+						<div id="m">35</div>
+						Minuts
+					</span>
+					<span>
+						<div id="s">54</div>
+						Seconds
+					</span>
+				</div>
+			</div>
+		</div>
+		<script>
+			var comingdate = new Date("Dec 23, 2023 00:00:00");
+			const input = document.querySelector("#password");
+
+			var d = document.getElementById("d");
+			var h = document.getElementById("h");
+			var m = document.getElementById("m");
+			var s = document.getElementById("s");
+			d.innerHTML = getTrueNumber(0);
+			h.innerHTML = getTrueNumber(0);
+			m.innerHTML = getTrueNumber(0);
+			s.innerHTML = getTrueNumber(0);
+
+			var x = setInterval(function () {
+				var now = new Date();
+				var des = comingdate.getTime() - now.getTime();
+				if (des > 0) {
+					var days = Math.floor(des / (1000 * 60 * 60 * 24));
+					var hours = Math.floor((des % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+					var mins = Math.floor((des % (1000 * 60 * 60)) / (1000 * 60));
+					var secs = Math.floor((des % (1000 * 60)) / 1000);
+
+					d.innerHTML = getTrueNumber(days);
+					h.innerHTML = getTrueNumber(hours);
+					m.innerHTML = getTrueNumber(mins);
+					s.innerHTML = getTrueNumber(secs);
+				} else {
+					d.innerHTML = getTrueNumber(0);
+					h.innerHTML = getTrueNumber(0);
+					m.innerHTML = getTrueNumber(0);
+					s.innerHTML = getTrueNumber(0);
+					clearInterval(x);
+				}
+			}, 1000);
+
+			function getTrueNumber(x) {
+				return x < 10 ? "0" + x : x;
+			}
+		</script>
 	</body>
 </html>
